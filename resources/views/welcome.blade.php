@@ -101,7 +101,7 @@
                         <p class="card-text mb-auto">En el mundo el almacenamiento en una nube se ha demostrado ser eficiente y seguro, que cualquier entidad puede acceder desde cualquier parte del mundo con el unico requisito de tener acceso a internet.</p>
                       </div>
                       <div class="col-auto d-none d-lg-block text-center">
-                        <img style='width:50%; height:80%' src="/storage/World.jpeg" class="img-thumbnail">
+                        <img style='width:50%; height:80%' src="{{asset('/storage/World.jpeg')}}" class="img-thumbnail">
                       </div>
                     </div>
                   </div>
@@ -113,7 +113,7 @@
                         <p class="mb-auto">Hoy en dia, la inteligencia artificial arrasa en todas las herramientas existentes que facilita las tareas evitando la perdida de grandes cantidades de tiempo, es por eso que contamos con una busqueda inteliegente que permite realizar busqueda de manera mas detallada y rapida.</p>
                       </div>
                       <div class="col-auto d-none d-lg-block text-center">
-                        <img style='width:50%; height:80%' src="/storage/AI.jpeg" class="img-thumbnail">
+                        <img style='width:50%; height:80%' src="{{asset('/storage/AI.jpeg')}}" class="img-thumbnail">
                       </div>
                     </div>
                   </div>
