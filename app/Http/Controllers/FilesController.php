@@ -213,9 +213,9 @@ class FilesController extends Controller
                 'folder_id' => $request->fold_id,
                 'nl_query' => $request->texto,
             ]);
-        dd(json_decode($response->body()));
+        //dd(json_decode($response->body()));
         if($response->ok()) {
-            $var = $request->variable;
+            $var = $request->texto;
             $documents = json_decode($response->body());
             $ident = $request->fold_id;
             return view('folders.lengnatural', compact('documents', 'var', 'ident'));
