@@ -157,7 +157,7 @@ class FilesController extends Controller
             $ident = $request->fold_id;
             return view('folders.category', compact('documents', 'var', 'ident'));
         } else {
-            return redirect()->back()->with('error', 'Error en eliminar archivo');
+            return redirect()->back()->with('error', 'Error en obtener archivo de categoria');
         }
     }
 
@@ -178,7 +178,7 @@ class FilesController extends Controller
             $ident = $request->fold_id;
             return view('folders.concept', compact('documents', 'var', 'ident'));
         } else {
-            return redirect()->back()->with('error', 'Error en eliminar archivo');
+            return redirect()->back()->with('error', 'Error en obtener archivo de concepto');
         }
     }
     
@@ -199,7 +199,7 @@ class FilesController extends Controller
             $ident = $request->fold_id;
             return view('folders.sentiment', compact('documents', 'var', 'ident'));
         } else {
-            return redirect()->back()->with('error', 'Error en eliminar archivo');
+            return redirect()->back()->with('error', 'Error en obtener archivo de sentimiento');
         }
     }
 
@@ -212,6 +212,7 @@ class FilesController extends Controller
             [
                 'folder_id' => $request->fold_id,
                 'nl_query' => $request->texto,
+
             ]);
         //dd(json_decode($response->body()));
         if($response->ok()) {
@@ -220,7 +221,139 @@ class FilesController extends Controller
             $ident = $request->fold_id;
             return view('folders.lengnatural', compact('documents', 'var', 'ident'));
         } else {
-            return redirect()->back()->with('error', 'Error en eliminar archivo');
+            return redirect()->back()->with('error', 'Error en obtener archivo de lenguaje natural');
+        }
+    }
+
+    public function lengNaturalAdvanced(Request $request)
+    {
+        //$response;
+
+        /*if (!is_null($request->category) && !is_null($request->concept) && !is_null($request->sentiment)) {
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer '.Session::get('token'),
+            ])->get(
+                self::$authServer.'/folders/naturalLanguage',
+                [
+                    'folder_id' => $request->ident,
+                    'nl_query' => $request->texto1,
+                    'category' => $request->category,
+                    'concept' => $request->concept,
+                    'sentiment' => $request->sentiment,
+                ]);
+        }
+
+        if (is_null($request->category) && !is_null($request->concept) && !is_null($request->sentiment)) {
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer '.Session::get('token'),
+            ])->get(
+                self::$authServer.'/folders/naturalLanguage',
+                [
+                    'folder_id' => $request->ident,
+                    'nl_query' => $request->texto1,
+                    'concept' => $request->concept,
+                    'sentiment' => $request->sentiment,
+                ]);
+        }
+
+        if (!is_null($request->category) && is_null($request->concept) && !is_null($request->sentiment)) {
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer '.Session::get('token'),
+            ])->get(
+                self::$authServer.'/folders/naturalLanguage',
+                [
+                    'folder_id' => $request->ident,
+                    'nl_query' => $request->texto1,
+                    'category' => $request->category,
+                    'sentiment' => $request->sentiment,
+                ]);
+        }
+
+        if (!is_null($request->category) && !is_null($request->concept) && is_null($request->sentiment)) {
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer '.Session::get('token'),
+            ])->get(
+                self::$authServer.'/folders/naturalLanguage',
+                [
+                    'folder_id' => $request->ident,
+                    'nl_query' => $request->texto1,
+                    'category' => $request->category,
+                    'concept' => $request->concept,
+                ]);
+        }
+
+        if (!is_null($request->category) && is_null($request->concept) && is_null($request->sentiment)) {
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer '.Session::get('token'),
+            ])->get(
+                self::$authServer.'/folders/naturalLanguage',
+                [
+                    'folder_id' => $request->ident,
+                    'nl_query' => $request->texto1,
+                    'category' => $request->category,
+                ]);
+        }
+
+        if (is_null($request->category) && !is_null($request->concept) && is_null($request->sentiment)) {
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer '.Session::get('token'),
+            ])->get(
+                self::$authServer.'/folders/naturalLanguage',
+                [
+                    'folder_id' => $request->ident,
+                    'nl_query' => $request->texto1,
+                    'concept' => $request->concept,
+                ]);
+        }
+
+        if (is_null($request->category) && is_null($request->concept) && !is_null($request->sentiment)) {
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer '.Session::get('token'),
+            ])->get(
+                self::$authServer.'/folders/naturalLanguage',
+                [
+                    'folder_id' => $request->ident,
+                    'nl_query' => $request->texto1,
+                    'sentiment' => $request->sentiment,
+                ]);
+        }
+
+        if (is_null($request->category) && is_null($request->concept) && is_null($request->sentiment)) {
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer '.Session::get('token'),
+            ])->get(
+                self::$authServer.'/folders/naturalLanguage',
+                [
+                    'folder_id' => $request->ident,
+                    'nl_query' => $request->texto1,
+                ]);
+        }*/
+        $this->validate($request, [
+            'category' => 'required',
+            'concept' => 'required',
+            'sentiment' => 'required',
+            'texto1' => 'required',
+        ]);
+
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer '.Session::get('token'),
+        ])->get(
+            self::$authServer.'/folders/naturalLanguage',
+            [
+                'folder_id' => $request->ident,
+                'nl_query' => $request->texto1,
+                'category' => $request->category,
+                'concept' => $request->concept,
+                'sentiment' => $request->sentiment,
+            ]);
+        //dd(json_decode($response->body()));
+        if($response->ok()) {
+            $var = $request->texto1;
+            $documents = json_decode($response->body());
+            $ident = $request->ident;
+            return view('folders.langnaturaladvanced', compact('documents', 'var', 'ident'));
+        } else {
+            return redirect()->back()->with('error', 'Error en obtener archivo de lenguaje natural');
         }
     }
 }

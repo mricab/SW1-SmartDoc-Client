@@ -50,6 +50,11 @@ Route::get('/lengnatural', array (
     'uses' => 'FilesController@lengNatural'
 ));
 
+Route::get('/lengnaturaladvanced', array (
+    'as' => 'leng_natural_advanced',
+    'uses' => 'FilesController@lengNaturalAdvanced'
+));
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -28,6 +28,11 @@
                                 </div>
                             </form>
                         </div>
+                        <div class="justify-content-end">
+                            <button type="button" class="btn btn-sm btn-outline-secondary float-end" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                                Busqueda Avanzada
+                            </button> 
+                        </div>
                     </div>
                     
 
@@ -144,7 +149,7 @@
                     
                 
                       
-                      <!-- Modal -->
+                      <!-- Modal Nuevo -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -163,6 +168,55 @@
                                             <br>
                                             <button type="button" class="btn btn-secondary float-end" data-bs-dismiss="modal">Cerrar</button>
                                             <button type="submit" class="btn btn-primary float-end">Guardar</button>
+                                        </form>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+
+                      <!-- Modal busqueda avanzada -->
+                      <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel1">Busqueda avanzada</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form method="GET" action="{{ route('leng_natural_advanced') }}">
+                                            @csrf
+                                            <label class="form-label">Buscar</label>
+                                            <input name="texto1" id="document1" class="form-control" type="search" required>
+                                            <hr>
+                                            <label class="form-label">Filtros</label>
+                                            <br>
+                                            <label class="form-label">Categoria</label>
+                                                <select class="form-select col-12" name="category" id="category" aria-label="Default select example">
+                                                    <option selected disabled>-- Seleccione Categoria --</option>
+                                                        @foreach ($categories->categories as $cat)
+                                                            <option value="{{$cat->name}}">{{$cat->name}}</option>
+                                                        @endforeach
+                                                </select>
+                                            <label class="form-label">Concepto</label>
+                                                <select class="form-select col-12" name="concept" id="concept" aria-label="Default select example">
+                                                    <option selected>-- Seleccione Concepto --</option>
+                                                        @foreach ($concepts->concepts as $con)
+                                                            <option value="{{$con->name}}">{{$con->name}}</option>
+                                                        @endforeach
+                                                </select>
+                                            <label class="form-label">Sentimiento</label>
+                                                <select class="form-select col-12" name="sentiment" id="sentiment" aria-label="Default select example">
+                                                    <option selected>-- Seleccione Sentimiento --</option>
+                                                        @foreach ($sentiments->concepts as $sent)
+                                                            <option value="{{$sent->name}}">{{$sent->name}}</option>
+                                                        @endforeach
+                                                </select>
+
+                                            <input type="hidden" name="ident" id="ident" value="{{$ident}}">                                            
+                                            <br>
+                                            <br>
+                                            <button type="button" class="btn btn-secondary float-end" data-bs-dismiss="modal">Cerrar</button>
+                                            <button type="submit" class="btn btn-primary float-end">Buscar</button>
                                         </form>
                                     </div>
                             </div>
